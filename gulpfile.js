@@ -34,7 +34,7 @@ gulp.task('bower', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build-css', ['bower'], function() {
+gulp.task('build-css', function() {
     return gulp.src('./styles/*')
         .pipe(sourcemaps.init())
         .pipe(sass())
@@ -45,7 +45,7 @@ gulp.task('build-css', ['bower'], function() {
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
-// fills in the Angular template cache, to prevent loading html templates via multiple
+// fills in the Angular template cache, to prevent loading the html templates via
 // separate http requests
 //
 /////////////////////////////////////////////////////////////////////////////////////
@@ -78,7 +78,8 @@ gulp.task('jshint', function() {
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
-// Build a minified Javascript bundle
+// Build a minified Javascript bundle - the order of the js files is determined
+// by browserify
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
@@ -94,7 +95,7 @@ gulp.task('build-js', function() {
         .pipe(buffer())
         .pipe(cachebust.resources())
         .pipe(sourcemaps.init({loadMaps: true}))
-        /*.pipe(uglify())*/
+        /*.pipe(uglify())*/ //TODO
         .on('error', gutil.log)
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./dist/js/'));
@@ -102,9 +103,10 @@ gulp.task('build-js', function() {
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
-// full build (except sprites), applies cache busting to the main page css references
+// full build (except sprites), applies cache busting to the main page css and js bundles
 //
 /////////////////////////////////////////////////////////////////////////////////////
+
 gulp.task('build', ['bower','build-css','build-template-cache', 'jshint', 'build-js'], function() {
     return gulp.src('index.html')
         .pipe(cachebust.references())
@@ -113,9 +115,10 @@ gulp.task('build', ['bower','build-css','build-template-cache', 'jshint', 'build
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
-// watches the main file types, and triggers a build when a modification is detected
+// watches file system and triggers a build when a modification is detected
 //
 /////////////////////////////////////////////////////////////////////////////////////
+
 gulp.task('watch', function() {
     gulp.watch(['./index.html','./partials/*.html', './styles/*.*css', './js/**/*.js'], ['build']);
 });
@@ -125,6 +128,7 @@ gulp.task('watch', function() {
 // launches a web server that serves files in the current directory
 //
 /////////////////////////////////////////////////////////////////////////////////////
+
 gulp.task('webserver', function() {
     gulp.src('.')
         .pipe(webserver({
@@ -139,6 +143,7 @@ gulp.task('webserver', function() {
 // launch a build upon modification and publish it to a running server
 //
 /////////////////////////////////////////////////////////////////////////////////////
+
 gulp.task('dev', ['watch', 'webserver']);
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -147,9 +152,10 @@ gulp.task('dev', ['watch', 'webserver']);
 // This is not included in the recurring development build and needs to be run separately
 //
 /////////////////////////////////////////////////////////////////////////////////////
+
 gulp.task('sprite', function () {
 
-    var spriteData = gulp.src('./ngv/images/sprite/*.png')
+    var spriteData = gulp.src('./images/*.png')
         .pipe(spritesmith({
             imgName: 'todo-sprite.png',
             cssName: '_todo-sprite.scss',
