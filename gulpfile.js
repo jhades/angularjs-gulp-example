@@ -36,7 +36,7 @@ gulp.task('bower', function() {
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('build-css', ['bower'], function() {
-    return gulp.src('./style/*')
+    return gulp.src('./styles/*')
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(cachebust.resources())
