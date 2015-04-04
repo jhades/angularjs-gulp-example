@@ -107,7 +107,7 @@ gulp.task('build-js', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 gulp.task('build', ['bower','build-css','build-template-cache', 'jshint', 'build-js'], function() {
-    return gulp.src('showcase.html')
+    return gulp.src('index.html')
         .pipe(cachebust.references())
         .pipe(gulp.dest('dist'));
 });
