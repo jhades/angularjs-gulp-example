@@ -26,7 +26,7 @@ angular.module('todomvc')
 
 			$scope.statusFilter = (status === 'active') ?
 				{ completed: false } : (status === 'completed') ?
-				{ completed: true } : null;
+				{ completed: true } : {};
 		});
 
 		$scope.addTodo = function () {
