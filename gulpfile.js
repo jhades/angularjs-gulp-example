@@ -19,7 +19,8 @@ var cachebust = new CacheBuster();
 // runs bower to install frontend dependencies
 //
 /////////////////////////////////////////////////////////////////////////////////////
-gulp.task('install', function() {
+
+gulp.task('bower', function() {
 
     var install = require("gulp-install");
 
@@ -27,33 +28,14 @@ gulp.task('install', function() {
         .pipe(install());
 });
 
-/////////////////////////////////////////////////////////////////////////////////////
-//
-// generates a sprite png and the corresponding sass sprite map.
-// This is not included in the recurring development build and needs to be run separately
-//
-/////////////////////////////////////////////////////////////////////////////////////
-gulp.task('sprite', function () {
-    
-    var spriteData = gulp.src('./ngv/images/sprite/*.png')
-        .pipe(spritesmith({
-            imgName: 'angular-velocity-sprite.png',
-            cssName: '_angular-velocity-sprite.scss',
-            algorithm: 'top-down',
-            padding: 5
-        }));
-    
-        spriteData.css.pipe(gulp.dest('./ngv/styles/project'));
-
-        spriteData.img.pipe(gulp.dest('./dist'))
-});
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
 // runs sass, creates css source maps
 //
 /////////////////////////////////////////////////////////////////////////////////////
-gulp.task('build-css', ['install'], function() {
+
+gulp.task('build-css', ['bower'], function() {
     return gulp.src('./ngv/styles/**/*.*css')
         .pipe(sourcemaps.init())
         .pipe(sass())
@@ -68,6 +50,7 @@ gulp.task('build-css', ['install'], function() {
 // http requests
 //
 /////////////////////////////////////////////////////////////////////////////////////
+
 gulp.task('build-template-cache',  function() {
     
     var ngHtml2Js = require("gulp-ng-html2js"),
@@ -96,7 +79,7 @@ gulp.task('jshint', function() {
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
-// TODO
+// Build a minified JAvascript bundle
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
@@ -112,7 +95,7 @@ gulp.task('build-js', function() {
         .pipe(buffer())
         .pipe(cachebust.resources())
         .pipe(sourcemaps.init({loadMaps: true}))
-        /*.pipe(uglify())*/
+        .pipe(uglify())
         .on('error', gutil.log)
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./dist/js/'));
@@ -123,7 +106,7 @@ gulp.task('build-js', function() {
 // full build (except sprites), applies cache busting to the main page css references
 //
 /////////////////////////////////////////////////////////////////////////////////////
-gulp.task('build', ['install','build-css','build-template-cache', 'jshint', 'build-js'], function() {
+gulp.task('build', ['bower','build-css','build-template-cache', 'jshint', 'build-js'], function() {
     return gulp.src('showcase.html')
         .pipe(cachebust.references())
         .pipe(gulp.dest('dist'));
@@ -158,6 +141,27 @@ gulp.task('webserver', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 gulp.task('dev', ['watch', 'webserver']);
+
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// generates a sprite png and the corresponding sass sprite map.
+// This is not included in the recurring development build and needs to be run separately
+//
+/////////////////////////////////////////////////////////////////////////////////////
+gulp.task('sprite', function () {
+
+    var spriteData = gulp.src('./ngv/images/sprite/*.png')
+        .pipe(spritesmith({
+            imgName: 'angular-velocity-sprite.png',
+            cssName: '_angular-velocity-sprite.scss',
+            algorithm: 'top-down',
+            padding: 5
+        }));
+
+    spriteData.css.pipe(gulp.dest('./ngv/styles/project'));
+
+    spriteData.img.pipe(gulp.dest('./dist'))
+});
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
