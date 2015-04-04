@@ -28,7 +28,6 @@ gulp.task('bower', function() {
         .pipe(install());
 });
 
-
 /////////////////////////////////////////////////////////////////////////////////////
 //
 // runs sass, creates css source maps
@@ -56,10 +55,10 @@ gulp.task('build-template-cache',  function() {
     var ngHtml2Js = require("gulp-ng-html2js"),
         concat = require("gulp-concat");
     
-    return gulp.src("./ngv/partials/*.html")
+    return gulp.src("./partials/*.html")
         .pipe(ngHtml2Js({
-            moduleName: "ngvPartials",
-            prefix: "/ngv/partials/"
+            moduleName: "todoPartials",
+            prefix: "/partials/"
         }))
         .pipe(concat("templateCachePartials.js"))
         .pipe(gulp.dest("./dist"));
@@ -87,7 +86,7 @@ gulp.task('build-js', function() {
     var b = browserify({
         entries: './js/app.js',
         debug: true,
-        paths: ['/js/**']
+        paths: ['./js/controllers', './js/services', './js/directives']
     });
 
     return b.bundle()
@@ -95,7 +94,7 @@ gulp.task('build-js', function() {
         .pipe(buffer())
         .pipe(cachebust.resources())
         .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify())
+        /*.pipe(uglify())*/
         .on('error', gutil.log)
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./dist/js/'));

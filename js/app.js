@@ -5,6 +5,11 @@
  *
  * @type {angular.Module}
  */
+
+angular = require('angular');
+require('angular-route');
+require('../dist/templateCachePartials');
+
 angular.module('todomvc', ['ngRoute'])
 	.config(function ($routeProvider) {
 		'use strict';
@@ -30,3 +35,8 @@ angular.module('todomvc', ['ngRoute'])
 				redirectTo: '/'
 			});
 	});
+
+require('todoCtrl');
+require('todoStorage');
+require('todoFocus');
+require('todoEscape');
