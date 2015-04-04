@@ -117,7 +117,7 @@ gulp.task('build', ['bower','build-css','build-template-cache', 'jshint', 'build
 //
 /////////////////////////////////////////////////////////////////////////////////////
 gulp.task('watch', function() {
-    gulp.watch(['./**/*.html', './styles/**/*.*css', './js/**/*.js'], ['build']);
+    gulp.watch(['./index.html','./partials/*.html', './styles/*.*css', './js/**/*.js'], ['build']);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
