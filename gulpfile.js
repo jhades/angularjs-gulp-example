@@ -46,8 +46,8 @@ gulp.task('build-css', ['bower'], function() {
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
-// fills in the Angular template cache, to prevent loading html template via multiple
-// http requests
+// fills in the Angular template cache, to prevent loading html templates via multiple
+// separate http requests
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
@@ -72,22 +72,22 @@ gulp.task('build-template-cache',  function() {
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('jshint', function() {
-    gulp.src('/ngv/directives/**/*.js')
+    gulp.src('/js/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
-// Build a minified JAvascript bundle
+// Build a minified Javascript bundle
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('build-js', function() {
     var b = browserify({
-        entries: './demo/run-demo-app.js',
+        entries: './js/app.js',
         debug: true,
-        paths: ['/demo/scripts','./ngv','/ngv/directives']
+        paths: ['/js/**']
     });
 
     return b.bundle()
@@ -118,7 +118,7 @@ gulp.task('build', ['bower','build-css','build-template-cache', 'jshint', 'build
 //
 /////////////////////////////////////////////////////////////////////////////////////
 gulp.task('watch', function() {
-    gulp.watch(['./ngv/partials/*.html', './ngv/styles/**/*.*css', './demo/forms/*.html'], ['build']);
+    gulp.watch(['./**/*.html', './styles/**/*.*css', './js/**/*.js'], ['build']);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -131,7 +131,7 @@ gulp.task('webserver', function() {
         .pipe(webserver({
             livereload: true,
             directoryListing: true,
-            open: "http://localhost:8000/dist/showcase.html"
+            open: "http://localhost:8000/dist/index.html"
         }));
 });
 
@@ -152,14 +152,13 @@ gulp.task('sprite', function () {
 
     var spriteData = gulp.src('./ngv/images/sprite/*.png')
         .pipe(spritesmith({
-            imgName: 'angular-velocity-sprite.png',
-            cssName: '_angular-velocity-sprite.scss',
+            imgName: 'todo-sprite.png',
+            cssName: '_todo-sprite.scss',
             algorithm: 'top-down',
             padding: 5
         }));
 
-    spriteData.css.pipe(gulp.dest('./ngv/styles/project'));
-
+    spriteData.css.pipe(gulp.dest('./dist'));
     spriteData.img.pipe(gulp.dest('./dist'))
 });
 
