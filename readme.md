@@ -1,6 +1,6 @@
 # AngularJS Gulp Baseline Build 
 
-This repository contains a baseline Gulp build for AngularJs development, applied to a sample test app.  The goal of the build is to be a simple as possible but still include all the features that an AngularJs project will likelly need: 
+This repository contains a baseline Gulp build for AngularJs development, applied to a sample test app.  The goal of the build is to be a good start for an Agular project: it's as simple as possible but still include all the features that an AngularJs project will likelly need: 
 
 * integration with bower - to ensure all the latest dependencies are present
 * SASS (with source maps) - for building more maintainable stylesheets
@@ -12,3 +12,6 @@ This repository contains a baseline Gulp build for AngularJs development, applie
 * Angular-friendly minification
 * sprite generation 
 * a development web server with live reload, that loads the initial page of the project
+
+A blog post concerning this build is available at [TODO](TODO)
+
