@@ -6,14 +6,15 @@ The build is as simple as possible but still includes all the features that an A
 
 * integration with bower - to ensure all the latest dependencies are present
 * SASS (with source maps) - for building more maintainable stylesheets
-* cache busting - via adding an hash to all css/js file names
+* cache busting - to prevent cache problems in all environments, dev tools opened or closed, etc.
 * template cache pre-population - to prevent that each template causes one extra HTTP request
 * jshint - the de-facto Javascript code quality checker
 * concatenation
 * browserify integration - for using the CommonJs *require('module')* synchronous import syntax and avoid maintaining config files with dependencies
+* Javascript source maps
 * Angular-friendly minification
 * sprite generation 
-* a development web server with live reload, that loads the initial page of the project
+* a development web server with live reload, that re-loads the initial page of the project
 
 A blog post concerning this build is available at [TODO](TODO)
 
