@@ -1,4 +1,4 @@
-# AngularJS Gulp Baseline Build 
+# What every Angular project likely needs - And a Gulp build to provide it
 
 This repository contains a baseline Gulp build for AngularJs development, applied to a sample test app.  The goal of the build is to provide a good starting point for an Agular project. 
 
