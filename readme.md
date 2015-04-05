@@ -12,7 +12,7 @@ The build is as simple as possible (less than 100 lines excluding comments), but
 * concatenation
 * browserify integration - for using the CommonJs *require('module')* synchronous import syntax and avoid maintaining config files with dependencies
 * Javascript source maps
-* Angular-friendly minification
+* Angular-friendly Javascript minification
 * sprite generation 
 * a development web server with live reload, that re-loads the initial page of the project
 
