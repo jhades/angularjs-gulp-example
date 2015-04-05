@@ -5,7 +5,7 @@ This repository contains a baseline Gulp build for AngularJs development, applie
 The build is as simple as possible (less than 100 lines excluding comments), but still includes all the features that an AngularJs project will most likelly need: 
 
 * integration with bower - to ensure all the latest dependencies are present
-* SASS (with source maps) - for building more maintainable stylesheets
+* SASS (with source maps) - for building more maintainable stylesheets. The plugin used uses libsass and does not introduce a dependency in the Ruby tool chain 
 * cache busting - to prevent cache problems in all environments, dev tools opened or closed, etc.
 * template cache pre-population - to prevent that each template causes one extra HTTP request
 * jshint - the de-facto Javascript code quality checker
