@@ -1,8 +1,6 @@
 # What every Angular project likely needs - and a Gulp build to provide it
 
-This repository contains a baseline Gulp build for AngularJs development, applied to a sample test app.  The goal of the build is to provide a good starting point for an Agular project. 
-
-The build is as simple as possible but still includes all the features that an AngularJs project will likelly need: 
+This repository contains a baseline Gulp build for AngularJs development, applied to a sample test app. The build is as simple as possible but still includes all the features that an AngularJs project will likelly need: 
 
 * integration with bower - to ensure all the latest dependencies are present
 * SASS (with source maps) - for building more maintainable stylesheets
