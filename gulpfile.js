@@ -9,7 +9,8 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
     uglify = require('gulp-uglify'),
-    gutil = require('gulp-util');
+    gutil = require('gulp-util'),
+    ngAnnotate = require('browserify-ngannotate');
 
 var CacheBuster = require('gulp-cachebust');
 var cachebust = new CacheBuster();
@@ -87,7 +88,8 @@ gulp.task('build-js', function() {
     var b = browserify({
         entries: './js/app.js',
         debug: true,
-        paths: ['./js/controllers', './js/services', './js/directives']
+        paths: ['./js/controllers', './js/services', './js/directives'],
+        transform: [ngAnnotate]
     });
 
     return b.bundle()
@@ -95,7 +97,7 @@ gulp.task('build-js', function() {
         .pipe(buffer())
         .pipe(cachebust.resources())
         .pipe(sourcemaps.init({loadMaps: true}))
-        /*.pipe(uglify())*/ //TODO
+        .pipe(uglify())
         .on('error', gutil.log)
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./dist/js/'));

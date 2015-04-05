@@ -18,13 +18,13 @@ angular.module('todomvc', ['ngRoute'])
 			controller: 'TodoCtrl',
 			templateUrl: 'todomvc-index.html',
 			resolve: {
-				store: function (todoStorage) {
+				store: ['todoStorage', function (todoStorage) {
 					// Get the correct module (API or localStorage).
 					return todoStorage.then(function (module) {
 						module.get(); // Fetch the todo records in the background.
 						return module;
 					});
-				}
+				}]
 			}
 		};
 
