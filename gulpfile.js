@@ -1,6 +1,7 @@
 
 var gulp = require('gulp'),
     webserver = require('gulp-webserver'),
+    del = require('del'),
     sass = require('gulp-sass'),
     jshint = require('gulp-jshint'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -14,6 +15,11 @@ var gulp = require('gulp'),
 
 var CacheBuster = require('gulp-cachebust');
 var cachebust = new CacheBuster();
+
+
+gulp.task('clean', function (cb) {
+    del(['dist'], cb);
+});
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -35,7 +41,7 @@ gulp.task('bower', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build-css', function() {
+gulp.task('build-css', ['clean'], function() {
     return gulp.src('./styles/*')
         .pipe(sourcemaps.init())
         .pipe(sass())
@@ -51,7 +57,7 @@ gulp.task('build-css', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build-template-cache',  function() {
+gulp.task('build-template-cache', ['clean'], function() {
     
     var ngHtml2Js = require("gulp-ng-html2js"),
         concat = require("gulp-concat");
@@ -84,7 +90,7 @@ gulp.task('jshint', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build-js', function() {
+gulp.task('build-js', ['clean'], function() {
     var b = browserify({
         entries: './js/app.js',
         debug: true,
@@ -109,7 +115,7 @@ gulp.task('build-js', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build', ['bower','build-css','build-template-cache', 'jshint', 'build-js'], function() {
+gulp.task('build', [ 'bower','build-css','build-template-cache', 'jshint', 'build-js'], function() {
     return gulp.src('index.html')
         .pipe(cachebust.references())
         .pipe(gulp.dest('dist'));
