@@ -20,10 +20,7 @@ angular.module('todomvc', ['ngRoute','todoPartials'])
 			resolve: {
 				store: ['todoStorage', function (todoStorage) {
 					// Get the correct module (API or localStorage).
-					return todoStorage.then(function (module) {
-						module.get(); // Fetch the todo records in the background.
-						return module;
-					});
+					return todoStorage;
 				}]
 			}
 		};

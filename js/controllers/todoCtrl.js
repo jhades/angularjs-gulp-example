@@ -41,14 +41,8 @@ angular.module('todomvc')
 				return;
 			}
 
-			$scope.saving = true;
-			store.insert(newTodo)
-				.then(function success() {
-					$scope.newTodo = '';
-				})
-				.finally(function () {
-					$scope.saving = false;
-				});
+			store.insert(newTodo);
+			$scope.newTodo = '';
 		};
 
 		$scope.editTodo = function (todo) {
@@ -80,13 +74,8 @@ angular.module('todomvc')
 				return;
 			}
 
-			store[todo.title ? 'put' : 'delete'](todo)
-				.then(function success() {}, function error() {
-					todo.title = $scope.originalTodo.title;
-				})
-				.finally(function () {
-					$scope.editedTodo = null;
-				});
+			store[todo.title ? 'put' : 'delete'](todo);
+			$scope.editedTodo = null;
 		};
 
 		$scope.revertEdits = function (todo) {
@@ -108,10 +97,7 @@ angular.module('todomvc')
 			if (angular.isDefined(completed)) {
 				todo.completed = completed;
 			}
-			store.put(todo, todos.indexOf(todo))
-				.then(function success() {}, function error() {
-					todo.completed = !todo.completed;
-				});
+			store.put(todo, todos.indexOf(todo));
 		};
 
 		$scope.clearCompletedTodos = function () {
