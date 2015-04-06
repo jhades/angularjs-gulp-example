@@ -16,5 +16,19 @@ The build is as simple as possible (less than 100 lines excluding comments), but
 * sprite generation 
 * a development web server with live reload, that re-loads the initial page of the project
 
-A blog post concerning this build is available at [TODO](TODO)
+A blog post concerning this build is available [here](http://blog.jhades.org/http://localhost:20009/what-every-angular-project-likely-needs-and-a-gulp-build-to-provide-it/)
+
+# Installation instructions
+
+After cloning the project, run the following commands:
+
+    npm install
+    gulp
+    gulp dev
+    
+This will start the development server, the TODO sample app should be available at the following url:
+
+    http://localhost:8000/dist/index.html
+    
+
 
