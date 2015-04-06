@@ -1,4 +1,5 @@
-# What every Angular project likely needs - and a Gulp build to provide it
+What every Angular project likely needs - and a Gulp build to provide it
+=================
 
 This repository contains a baseline Gulp build for AngularJs development, applied to a sample test app. 
 
