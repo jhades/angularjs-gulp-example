@@ -1,4 +1,7 @@
 @charset "UTF-8";
+[ng-cloak] {
+  display: none; }
+
 hr {
   margin: 20px 0;
   border: 0;
@@ -426,4 +429,4 @@ label[for='toggle-all'] {
     bottom: 10px; } }
 
 
-/*# sourceMappingURL=maps/todo.59bb06d0.css.map */
+/*# sourceMappingURL=maps/todo.a785b905.css.map */
