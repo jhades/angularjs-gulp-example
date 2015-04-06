@@ -24,7 +24,9 @@ var cachebust = new CacheBuster();
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('clean', function (cb) {
-    del(['dist'], cb);
+    del([
+        'dist'
+    ], cb);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -155,7 +157,7 @@ gulp.task('build', [ 'clean', 'bower','build-css','build-template-cache', 'jshin
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('watch', function() {
-    gulp.watch(['./index.html','./partials/*.html', './styles/*.*css', './js/**/*.js'], ['build']);
+    return gulp.watch(['./index.html','./partials/*.html', './styles/*.*css', './js/**/*.js'], ['build']);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -164,10 +166,10 @@ gulp.task('watch', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('webserver', ['build'], function() {
+gulp.task('webserver', ['watch','build'], function() {
     gulp.src('.')
         .pipe(webserver({
-            livereload: true,
+            livereload: false,
             directoryListing: true,
             open: "http://localhost:8000/dist/index.html"
         }));

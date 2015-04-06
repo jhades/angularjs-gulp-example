@@ -10,7 +10,7 @@ angular = require('angular');
 require('angular-route');
 require('../dist/templateCachePartials');
 
-angular.module('todomvc', ['ngRoute'])
+angular.module('todomvc', ['ngRoute','todoPartials'])
 	.config(function ($routeProvider) {
 		'use strict';
 
@@ -40,3 +40,4 @@ require('todoCtrl');
 require('todoStorage');
 require('todoFocus');
 require('todoEscape');
+require('footer');
