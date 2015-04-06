@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     webserver = require('gulp-webserver'),
     del = require('del'),
     sass = require('gulp-sass'),
+    karma = require('gulp-karma'),
     jshint = require('gulp-jshint'),
     sourcemaps = require('gulp-sourcemaps'),
     spritesmith = require('gulp.spritesmith'),
@@ -90,6 +91,27 @@ gulp.task('jshint', function() {
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
+// runs karma tests
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('test', ['build-js'], function() {
+    var testFiles = [
+        './test/unit/*.js'
+    ];
+
+    return gulp.src(testFiles)
+        .pipe(karma({
+            configFile: 'karma.conf.js',
+            action: 'run'
+        }))
+        .on('error', function(err) {
+            console.log('karma tests failed: ' + err);
+            throw err;
+        });
+});
+/////////////////////////////////////////////////////////////////////////////////////
+//
 // Build a minified Javascript bundle - the order of the js files is determined
 // by browserify
 //
@@ -120,7 +142,7 @@ gulp.task('build-js', ['clean'], function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build', [ 'bower','build-css','build-template-cache', 'jshint', 'build-js'], function() {
+gulp.task('build', [ 'clean', 'bower','build-css','build-template-cache', 'jshint', 'build-js'], function() {
     return gulp.src('index.html')
         .pipe(cachebust.references())
         .pipe(gulp.dest('dist'));
@@ -142,7 +164,7 @@ gulp.task('watch', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('webserver', function() {
+gulp.task('webserver', ['build'], function() {
     gulp.src('.')
         .pipe(webserver({
             livereload: true,
@@ -185,4 +207,5 @@ gulp.task('sprite', function () {
 // installs and builds everything, including sprites
 //
 /////////////////////////////////////////////////////////////////////////////////////
-gulp.task('default', ['sprite','build']);
+
+gulp.task('default', ['sprite','build', 'test']);
