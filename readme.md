@@ -17,7 +17,7 @@ The build is as simple as possible (less than 100 lines excluding comments), but
 * sprite generation 
 * a development web server with live reload, that re-loads the initial page of the project
 
-A blog post concerning this build is available [here](http://blog.jhades.org/http://localhost:20009/what-every-angular-project-likely-needs-and-a-gulp-build-to-provide-it/)
+A blog post concerning this build is available [here](http://blog.jhades.org/what-every-angular-project-likely-needs-and-a-gulp-build-to-provide-it/)
 
 # Installation instructions
 
