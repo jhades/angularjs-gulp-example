@@ -7,6 +7,7 @@ The build is as simple as possible (less than 100 lines excluding comments), but
 
 * integration with bower - to ensure all the latest dependencies are present
 * Sass (with source maps) - for building more maintainable stylesheets. The plugin used uses libsass and does not introduce a dependency in the Ruby tool chain 
+* unit testing / integration testing with Karma, Jasmine and PhantomJs
 * cache busting - to prevent cache problems in all environments, dev tools opened or closed, etc.
 * template cache pre-population - to prevent that each template causes one extra HTTP request
 * jshint - the de-facto Javascript code quality checker
