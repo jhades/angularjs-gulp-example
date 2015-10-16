@@ -22,6 +22,10 @@ A blog post concerning this build is available [here](http://blog.jhades.org/wha
 
 # Installation instructions
 
+First make sure Gulp is globally installed, by running:
+
+    npm install -g gulp
+
 After cloning the project, run the following commands:
 
     npm install
